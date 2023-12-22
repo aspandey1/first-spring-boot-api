@@ -28,6 +28,14 @@ public class ContentCollectionRepository {
         return contentArrayList.stream().filter(c -> c.id().equals(id)).findFirst();
     }
 
+    public boolean existsById(Integer id){
+        return contentArrayList.stream().filter(c -> c.id().equals(id)).count() == 1;
+    }
+
+    public void save(Content content) {
+        contentArrayList.add(content);
+    }
+
     @PostConstruct
     private void init(){
         Content content1 = new Content(
@@ -52,9 +60,8 @@ public class ContentCollectionRepository {
         contentArrayList.add(content2);
     }
 
-    public void save(Content content) {
-        contentArrayList.add(content);
-    }
+
+
 
 
 }
