@@ -33,7 +33,12 @@ public class ContentCollectionRepository {
     }
 
     public void save(Content content) {
+        contentArrayList.removeIf(c -> c.id().equals(content.id()));
         contentArrayList.add(content);
+    }
+
+    public void delete(Integer id){
+        contentArrayList.removeIf(c -> c.id().equals(id));
     }
 
     @PostConstruct
