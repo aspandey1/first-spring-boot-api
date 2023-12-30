@@ -22,23 +22,30 @@ public class ContentController {
         this.repository = repository;
     }
 
-    // make a request and find all pieces of content
+    // GET REQUEST
+    // Make a request and find all pieces of content
     @GetMapping("")
     public List<Content> findAll(){
         return repository.findAll();
     }
 
+    // GET REQUEST
+    // Make a request and find content by ID
     @GetMapping("/{id}")
     public Content findById(@PathVariable Integer id){
         return repository.findByID(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Content not found"));
     }
 
+    // POST REQUEST
+    // Make a request to create new content
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
     public void create(@Valid @RequestBody Content content){
         repository.save(content);
     }
 
+    // PUT REQUEST
+    // Make a update to a content by ID
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
     public void update(@Valid @RequestBody Content content, @PathVariable Integer id){
@@ -48,6 +55,8 @@ public class ContentController {
         repository.save(content);
     }
 
+    // DELETE REQUEST
+    // Make a delete request by content ID
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
